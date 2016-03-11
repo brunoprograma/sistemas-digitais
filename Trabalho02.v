@@ -1,11 +1,11 @@
-module Led (input CLOCK_50, input KEY[0], output LEDG[0]);
+module Led (input CLOCK_50, input [0:0]KEY, output [0:0]LEDG);
 
     reg [25:0] counter;
     reg state;
     
     assign LEDG[0] = state;
     
-    always @ (posedge CLOCK_50, KEY[0]) begin
+    always @(posedge CLOCK_50) begin
         if (KEY[0] == 1) begin
             counter <= 0;
             state <= 0;
