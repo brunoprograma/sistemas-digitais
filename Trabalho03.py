@@ -33,7 +33,7 @@ for x in range(larg):
             entradas.append((x, y))
             saidas.append(res)
             if res:
-			    img.putpixel((x,y), (141,32,174))
+                img.putpixel((x,y), (141,32,174))
 
 img.save("imagem.png", "PNG")
 
