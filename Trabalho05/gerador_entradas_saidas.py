@@ -49,7 +49,7 @@ with open(join(curr_path, "entradas_triangulos.txt"), 'w') as entradas_triangulo
         with open(join(curr_path, "entradas_sign.txt"), "w") as entradas_sign:
             with open(join(curr_path, "saidas_sign.txt"), "w") as saidas_sign:
                 for (x, y, (p1, p2, p3), v, sv) in lista_valores:
-                    entradas_triangulos.write("%d %d %d %d %d %d %d %d\n" % (x, y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y))
-                    saidas_triangulos.write("%5d %5d %5d %5d %5d %5d %5d %5d = %d\n" % (x, y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, v))
-                    entradas_sign.write("%d %d %d %d %d %d\n" % (x, y, p1.x, p1.y, p2.x, p2.y))
-                    saidas_sign.write("%5d %5d %5d %5d %5d %5d = %d\n" % (x, y, p1.x, p1.y, p2.x, p2.y, sv))
+                    entradas_triangulos.write("%5d %5d %5d %5d %5d %5d %5d %5d\n" % (x, y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y))
+                    saidas_triangulos.write("%5d %5d %5d %5d %5d %5d %5d %5d = %5d\n" % (x, y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, v))
+                    entradas_sign.write("%5d %5d %5d %5d %5d %5d\n" % (x, y, p1.x, p1.y, p2.x, p2.y))
+                    saidas_sign.write("%5d %5d %5d %5d %5d %5d = %5d\n" % (x, y, p1.x, p1.y, p2.x, p2.y, sv))
