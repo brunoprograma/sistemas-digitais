@@ -21,7 +21,7 @@ def dentroTriang(ponto, triangulo):
     teste2 = sign(ponto, v2, v3) < 0
     teste3 = sign(ponto, v3, v1) < 0
 
-    return (teste1 == teste2 and teste2 == teste3, teste1 and teste2 and teste3)
+    return teste1 == teste2 and teste2 == teste3
 
 
 triangulos = [(Ponto(0, 0), Ponto(300, 0) , Ponto(0, 300)),
@@ -37,8 +37,8 @@ for x in range(larg):
     for y in range(alt):
         for t in triangulos:
             res = dentroTriang(Ponto(x, y), t)
-            saidas.append((x, y, t, 1 if res[0] else 0, 1 if res[1] else 0))
-            if res[0]:
+            saidas.append((x, y, t, 1 if res else 0))
+            if res:
                 img.putpixel((x,y), (255, 255, 255))
 
 lista_valores = random.sample(saidas, 500)
@@ -48,8 +48,12 @@ with open(join(curr_path, "entradas_triangulos.txt"), 'w') as entradas_triangulo
     with open(join(curr_path, "saidas_triangulos.txt"), 'w') as saidas_triangulos:
         with open(join(curr_path, "entradas_sign.txt"), "w") as entradas_sign:
             with open(join(curr_path, "saidas_sign.txt"), "w") as saidas_sign:
-                for (x, y, (p1, p2, p3), v, sv) in lista_valores:
-                    entradas_triangulos.write("%5d %5d %5d %5d %5d %5d %5d %5d\n" % (x, y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y))
-                    saidas_triangulos.write("%5d %5d %5d %5d %5d %5d %5d %5d = %5d\n" % (x, y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, v))
-                    entradas_sign.write("%5d %5d %5d %5d %5d %5d\n" % (x, y, p1.x, p1.y, p2.x, p2.y))
-                    saidas_sign.write("%5d %5d %5d %5d %5d %5d = %5d\n" % (x, y, p1.x, p1.y, p2.x, p2.y, sv))
+                for (x, y, (p1, p2, p3), v) in lista_valores:
+                    ponto = Ponto(x, y)
+                    p1_p2, p2_p3, p3_p1 = sign(ponto, p1, p2), sign(ponto, p2, p3), sign(ponto, p3, p1)
+                    entradas_triangulos.write("%d %d %d %d %d %d %d %d\n" % (x, y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y))
+                    saidas_triangulos.write("%5d %5d %5d %5d %5d %5d %5d %5d = %d\n" % (x, y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, v))
+                    entradas_sign.write("%d %d %d %d %d %d %d %d\n" % (x, y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y))
+                    saidas_sign.write("%5d %5d %5d %5d %5d %5d = %d\n" % (x, y, p1.x, p1.y, p2.x, p2.y, 1 if p1_p2 < 0 else 0))
+                    saidas_sign.write("%5d %5d %5d %5d %5d %5d = %d\n" % (x, y, p2.x, p2.y, p3.x, p3.y, 1 if p2_p3 < 0 else 0))
+                    saidas_sign.write("%5d %5d %5d %5d %5d %5d = %d\n" % (x, y, p3.x, p3.y, p1.x, p1.y, 1 if p3_p1 < 0 else 0))

@@ -41,6 +41,6 @@ module dentroTriang(
   sign T2(ptx, pty, p2x, p2y, p3x, p3y, teste2);
   sign T3(ptx, pty, p3x, p3y, p1x, p1y, teste3);
 
-  assign s = (teste1 == teste2) & (teste2 == teste3);
+  assign s = teste1 == teste2 & teste2 == teste3;
 
 endmodule
